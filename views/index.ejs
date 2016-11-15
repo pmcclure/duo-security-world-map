@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type='text/javascript'>  
+        google.charts.load('upcoming', {'packages': ['geochart']});
+        google.charts.setOnLoadCallback(drawMarkersMap);
+        var date;
+        function drawMarkersMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Marker', {role: 'tooltip', p:{html:true}}],
+                <% displayData.forEach((element) => { %>                       
+                    ['<%= element.location.city%> <%= element.location.state%> <%= element.location.country%>', 1, '<b>Username: </b> <%= element.username%><br><b>Time: </b> <%= element.timestamp%><br><b>IP: </b> <%= element.ip%><br><b>Method: </b> <%= element.integration%>'], 
+                <% }) %>
+             
+            ]);
+
+            var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+            chart.draw(data, {
+                displayMode: 'markers',
+                legend: 'none',
+                colorAxis: {colors: ['#e7711c', '#4374e0']},
+                tooltip: {isHtml: true}
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="chart_div"></div>
+</body>
+
+</html>
