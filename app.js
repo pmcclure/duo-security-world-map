@@ -17,36 +17,41 @@ var host = process.env.DUO_HOST;
 
 var date = new Date().toUTCString();
 //172800 is two days in seconds. i.e get the authentications from the last 2 days. 
-var mintime = Math.floor((new Date().getTime() / 1000) - 172800).toString();
+var twoDaysInSeconds = 172800;
+var mintime = Math.floor((new Date().getTime() / 1000) - twoDaysInSeconds).toString();
 var params = { 'mintime': mintime };
-var jsonResult;
-
 var client = new duo_api.Client(integrationKey, secretKey, host);
+var duoData = [];
 
-client.jsonApiCall(
-    'GET', '/admin/v1/logs/authentication', params,
-    function (res) {
-        if (res.stat !== 'OK') {
-            console.error('API call returned error: '
-                + res.message);
-                process.exit(1);
-        }
-                
-        var duoData = res.response;        
-        
-        for (var i=0; i < duoData.length; i++) {
-            duoData[i].timestamp = new Date(duoData[i].timestamp *1000).toString();            
-        }
-        
-        jsonResult = duoData;
-    })
+
+function getDuoData() {
+    client.jsonApiCall('GET', '/admin/v1/logs/authentication', params, function (res) {
+    if (res.stat !== 'OK') {
+        console.error('API call returned error: '
+            + res.message);
+        process.exit(1);
+    }
+
+    jsonResult = res.response;
+    
+    for (var i = 0; i < jsonResult.length; i++) {
+        jsonResult[i].timestamp = new Date(jsonResult[i].timestamp * 1000).toString();
+    }
+
+    duoData = jsonResult;    
+})
+}
+
+getDuoData();
 
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-    var displayData = jsonResult;
+    getDuoData();
+    var displayData = duoData;
+
     res.render('index', {
-        displayData: displayData
+        displayData: duoData
     })
 });
 
