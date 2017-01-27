@@ -6,7 +6,7 @@ Duo does include a small map on their admin dashboard but you cannot hover over 
 
 This map on mouseover inlcudes location/username/Timestamp/IP/Method
 
-[View a Demo here][https://pmcclure.github.io/duo-security-world-map-demo/]
+[View a Demo here](https://pmcclure.github.io/duo-security-world-map-demo/)
 
 ### Prerequisites
 
