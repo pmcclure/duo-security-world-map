@@ -2,9 +2,11 @@
 
 Just a quick, basic node site that connects to your Duo Security Account via their API and displays a large world map (via Google GeoChart) with your most recent authentications. 
 
-Duo does include a small map on their admin dashboard but you cannot hover over markers to found out info on the authentication attempt. 
+Duo does include a small map on their admin dashboard but you cannot hover over markers to found out info on authentications. 
 
 This map on mouseover inlcudes location/username/Timestamp/IP/Method
+
+[View a Demo here][https://pmcclure.github.io/duo-security-world-map-demo/]
 
 ### Prerequisites
 
@@ -19,3 +21,4 @@ DUO_SKEY=*******************
 ### Installing
 
 clone the repo, add the .env file, npm install and simply run with node app.js
+
