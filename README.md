@@ -20,5 +20,5 @@ DUO_SKEY=*******************
 
 ### Installing
 
-clone the repo, add the .env file, npm install and simply run with node app.js
+clone the repo, add the .env file, npm install and run with node app.js
 
