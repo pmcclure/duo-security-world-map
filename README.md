@@ -2,7 +2,7 @@
 
 Just a quick, basic node site that connects to your Duo Security Account via their API and displays a large world map (via Google GeoChart) with your most recent authentications. 
 
-Duo does include a small map on their admin dashboard but you can't hover over markers to found out info on authentications. 
+Duo does include a small map on their admin dashboard but you can't hover over markers to find info on authentications. 
 
 This map on mouseover inlcudes location/username/Timestamp/IP/Method
 
